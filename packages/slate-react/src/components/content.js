@@ -293,16 +293,18 @@ class Content extends React.Component {
     // already up to date, but we do want to update the native selection again
     // to make sure it is in sync. (2017/10/16)
     if (handler == 'onSelect') {
-      const { editor } = this.props
-      const { value } = editor
-      const { selection } = value
-      const window = getWindow(event.target)
-      const native = window.getSelection()
-      const range = findRange(native, value)
+      const { editor } = this.props;
+      if (!editor.state.isComposing) {
+        const { value } = editor
+        const { selection } = value
+        const window = getWindow(event.target)
+        const native = window.getSelection()
+        const range = findRange(native, value)
 
-      if (range && range.equals(selection.toRange())) {
-        this.updateSelection()
-        return
+        if (range && range.equals(selection.toRange())) {
+          this.updateSelection()
+          return
+        }
       }
     }
 
