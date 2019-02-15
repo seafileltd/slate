@@ -339,7 +339,9 @@ class Content extends React.Component {
       handler == 'onPaste' ||
       handler == 'onSelect'
     ) {
-      if (!this.isInEditor(event.target)) return
+      if (!(handler === 'onCopy' && this.props.editor.value.inlines.get(0) && this.props.editor.value.inlines.get(0).type === 'image')) {
+        if (!this.isInEditor(event.target)) return;
+      }
     }
 
     this.props[handler](event)
