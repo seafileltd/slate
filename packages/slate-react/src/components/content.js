@@ -69,6 +69,7 @@ class Content extends React.Component {
 
   tmp = {
     isUpdatingSelection: false,
+    isComposing: false
   }
 
   /**
@@ -387,8 +388,18 @@ class Content extends React.Component {
       handler == 'onPaste' ||
       handler == 'onSelect'
     ) {
-      if (!this.isInEditor(event.target)) {
-        return
+      if (handler === 'onCompositionStart') {
+        this.tmp.isComposing = true;
+      } else if (handler === 'onCompositionEnd') {
+        this.tmp.isComposing = false;
+      }
+
+      if (handler === 'onCopy' || handler === 'onCopy') {
+        if (!(this.props.editor.value.inlines.get(0) && this.props.editor.value.inlines.get(0).type === 'image')) {
+          if (!this.isInEditor(event.target)) return;
+        }
+      } else {
+        if (!this.isInEditor(event.target)) return;
       }
     }
 
