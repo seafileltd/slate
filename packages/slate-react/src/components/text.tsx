@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Range, Element, Text as SlateText } from 'slate'
 
 import Leaf from './leaf'
@@ -56,11 +56,22 @@ const Text = (props: {
     }
   })
 
-  return (
-    <span data-slate-node="text" ref={ref}>
-      {children}
-    </span>
-  )
+  if (editor.isInline(props.parent) && !editor.isVoid(props.parent)) {
+    const CreateAlwaysNewComponent = (props: {children: JSX.Element | null}) => {
+      return (
+        <span data-slate-node="text" ref={ref}>
+          {props.children}
+        </span>
+      )
+    };
+    return <CreateAlwaysNewComponent children={children} />
+  } else {
+    return (
+      <span data-slate-node="text" ref={ref}>
+        {children}
+      </span>
+    )
+  }
 }
 
 /**
@@ -137,6 +148,9 @@ const getLeaves = (node: SlateText, decorations: Range[]): SlateText[] => {
 }
 
 const MemoizedText = React.memo(Text, (prev, next) => {
+  if(next.parent.type === 'link') {
+    return false;
+  }
   return (
     next.parent === prev.parent &&
     next.isLast === prev.isLast &&

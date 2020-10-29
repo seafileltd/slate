@@ -678,7 +678,7 @@ export const Editable = (props: EditableProps) => {
             ) {
               const { nativeEvent } = event
               const { selection } = editor
-
+              const { isComposing } = state;
               // COMPAT: Since we prevent the default behavior on
               // `beforeinput` events, the browser doesn't think there's ever
               // any history stack to undo or redo, so we have to manage these
@@ -687,6 +687,11 @@ export const Editable = (props: EditableProps) => {
                 event.preventDefault()
                 editor.exec({ type: 'redo' })
                 return
+              }
+
+              if (isComposing && Hotkeys.isCompose(nativeEvent)) {
+                event.preventDefault();
+                return;
               }
 
               if (Hotkeys.isUndo(nativeEvent)) {

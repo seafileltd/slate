@@ -57,12 +57,23 @@ const String = (props: {
  */
 
 const TextString = (props: { text: string; isTrailing?: boolean }) => {
-  const { text, isTrailing = false } = props
-  return (
-    <span data-slate-string>
-      {text}
+
+  let { isTrailing = false } = props;
+
+  const CreateAlwaysNewComponent = (props: { text: String }) => {
+    return (
+      <span data-slate-string>
+      {props.text}
       {isTrailing ? '\n' : null}
     </span>
+    )
+  };
+
+  return (
+    <CreateAlwaysNewComponent
+      text={props.text}
+      isTrailing={props.isTrailing}
+    />
   )
 }
 

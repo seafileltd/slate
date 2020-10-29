@@ -96,9 +96,9 @@ const Element = ({ attributes, children, element }) => {
   switch (element.type) {
     case 'link':
       return (
-        <a {...attributes} href={element.url}>
+        <span {...attributes} href={element.url}>
           {children}
-        </a>
+        </span>
       )
     default:
       return <p {...attributes}>{children}</p>
@@ -148,4 +148,4 @@ const initialValue = [
   },
 ]
 
-export default LinkExample
+export default LinkExample;

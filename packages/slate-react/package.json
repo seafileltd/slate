@@ -1,8 +1,7 @@
 {
   "name": "@seafile/slate-react",
-  "aliasname": "slate-react",
   "description": "Tools for building completely customizable richtext editors with React.",
-  "version": "0.54.6",
+  "version": "0.54.8",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

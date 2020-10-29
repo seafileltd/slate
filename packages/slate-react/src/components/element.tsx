@@ -37,11 +37,10 @@ const Element = (props: {
     selection,
   } = props
   const ref = useRef<HTMLElement>(null)
-  const editor = useEditor()
+  const editor = useEditor();
   const readOnly = useReadOnly()
   const isInline = editor.isInline(element)
   const key = ReactEditor.findKey(editor, element)
-
   let children: JSX.Element | null = (
     <Children
       decorate={decorate}
