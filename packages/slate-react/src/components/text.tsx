@@ -56,6 +56,11 @@ const Text = (props: {
     }
   })
 
+  /**
+   *  modified code by https://github.com/ianstormtaylor/slate/issues/3695
+   *  make sure the dom can be updated
+   */
+
   if (editor.isInline(props.parent) && !editor.isVoid(props.parent)) {
     const CreateAlwaysNewComponent = (props: {children: JSX.Element | null}) => {
       return (
@@ -148,7 +153,7 @@ const getLeaves = (node: SlateText, decorations: Range[]): SlateText[] => {
 }
 
 const MemoizedText = React.memo(Text, (prev, next) => {
-  if(next.parent.type === 'link') {
+  if (next.parent.type === 'link') {
     return false;
   }
   return (

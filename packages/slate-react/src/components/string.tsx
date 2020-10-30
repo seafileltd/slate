@@ -60,6 +60,11 @@ const TextString = (props: { text: string; isTrailing?: boolean }) => {
 
   let { isTrailing = false } = props;
 
+  /**
+   *  modified code by https://github.com/ianstormtaylor/slate/issues/3695
+   *  make sure the dom can be updated
+   */
+
   const CreateAlwaysNewComponent = (props: { text: String }) => {
     return (
       <span data-slate-string>
