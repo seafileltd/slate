@@ -689,6 +689,7 @@ export const Editable = (props: EditableProps) => {
                 return
               }
 
+              // prevent up down left right key disruption selection
               if (isComposing && Hotkeys.isCompose(nativeEvent)) {
                 event.preventDefault();
                 return;
