@@ -18,7 +18,7 @@ const { FRAGMENT, HTML, TEXT } = TRANSFER_TYPES
  * @param {Editor} editor
  */
 
-function cloneFragment(event, editor, callback = () => undefined) {
+function cloneFragment(event, editor, fragment = editor.value.fragment, callback = () => undefined) {
   invariant(
     !Value.isValue(editor),
     'As of Slate 0.42.0, the `cloneFragment` utility takes an `editor` instead of a `value`.'
@@ -27,7 +27,7 @@ function cloneFragment(event, editor, callback = () => undefined) {
   const window = getWindow(event.target)
   const native = window.getSelection()
   const { value } = editor
-  const { document, fragment, selection } = value
+  const { document, selection } = value
   const { start, end } = selection
   const startVoid = document.getClosestVoid(start.key, editor)
   const endVoid = document.getClosestVoid(end.key, editor)

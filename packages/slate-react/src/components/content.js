@@ -69,6 +69,7 @@ class Content extends React.Component {
 
   tmp = {
     isUpdatingSelection: false,
+    isComposing: false
   }
 
   /**
@@ -341,16 +342,18 @@ class Content extends React.Component {
     // already up to date, but we do want to update the native selection again
     // to make sure it is in sync. (2017/10/16)
     if (handler == 'onSelect') {
-      const { editor } = this.props
-      const { value } = editor
-      const { selection } = value
-      const window = getWindow(event.target)
-      const native = window.getSelection()
-      const range = findRange(native, editor)
-
-      if (range && range.equals(selection.toRange())) {
-        this.updateSelection()
-        return
+      if (!this.tmp.isComposing) {
+        const { editor } = this.props
+        const { value } = editor
+        const { selection } = value
+        const window = getWindow(event.target)
+        const native = window.getSelection()
+        const range = findRange(native, editor)
+  
+        if (range && range.equals(selection.toRange())) {
+          this.updateSelection()
+          return
+        }
       }
     }
 
@@ -387,8 +390,18 @@ class Content extends React.Component {
       handler == 'onPaste' ||
       handler == 'onSelect'
     ) {
-      if (!this.isInEditor(event.target)) {
-        return
+      if (handler === 'onCompositionStart') {
+        this.tmp.isComposing = true;
+      } else if (handler === 'onCompositionEnd') {
+        this.tmp.isComposing = false;
+      }
+
+      if (handler === 'onCopy' || handler === 'onCopy') {
+        if (!(this.props.editor.value.inlines.get(0) && this.props.editor.value.inlines.get(0).type === 'image')) {
+          if (!this.isInEditor(event.target)) return;
+        }
+      } else {
+        if (!this.isInEditor(event.target)) return;
       }
     }
 
