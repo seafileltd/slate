@@ -182,7 +182,6 @@ export const Editable = (props: EditableProps) => {
     const el = ReactEditor.toDOMNode(editor, editor)
     state.isUpdatingSelection = true
     domSelection.removeAllRanges()
-    console.log('react');
     if (newDomRange) {
       domSelection.addRange(newDomRange!)
       // When the selected content exceeds the whole screen, you need to scroll the editor to the end of the range instead of the beginning to prevent the editor from rolling back
