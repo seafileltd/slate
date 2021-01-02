@@ -58,10 +58,9 @@ const Text = (props: {
 
   /**
    *  modified code by https://github.com/ianstormtaylor/slate/issues/3695
-   *  make sure the dom can be updated
+   *  make sure the dom can be updated when edit the link
    */
-
-  if (editor.isInline(props.parent) && !editor.isVoid(props.parent)) {
+  if (editor.isInline(props.parent) && !editor.isVoid(props.parent) && (ref && ref.current && ref.current.outerText !== text.text)) {
     const CreateAlwaysNewComponent = (props: {children: JSX.Element | null}) => {
       return (
         <span data-slate-node="text" ref={ref}>
