@@ -877,7 +877,7 @@ export const Editable = (props: EditableProps) => {
             // fall back to React's `onPaste` here instead.
             // COMPAT: Firefox, Chrome and Safari don't emit `beforeinput` events
             // when "paste as text in windows system or paste and match style in macOS" is used, so fallback.
-            // modified by https://github.com/ianstormtaylor/slate/blob/main/packages/slate-react/src/components/editable.tsx#L1094
+            // Modified by https://github.com/ianstormtaylor/slate/blob/main/packages/slate-react/src/components/editable.tsx#L1094
             if (
               !readOnly &&
               hasEditableTarget(editor, event.target) &&
