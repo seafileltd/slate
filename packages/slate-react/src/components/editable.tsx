@@ -5,7 +5,7 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 
 import Children from './children'
 import Hotkeys from '../utils/hotkeys'
-import { IS_FIREFOX, IS_SAFARI } from '../utils/environment'
+import { IS_FIREFOX, IS_SAFARI, HAS_BEFORE_INPUT_SUPPORT } from '../utils/environment'
 import { ReactEditor } from '..'
 import { ReadOnlyContext } from '../hooks/use-read-only'
 import { useSlate } from '../hooks/use-slate'
@@ -18,6 +18,7 @@ import {
   isDOMNode,
   isDOMText,
   DOMStaticRange,
+  isPlainTextOnlyPaste
 } from '../utils/dom'
 import {
   EDITOR_TO_ELEMENT,
@@ -230,7 +231,6 @@ export const Editable = (props: EditableProps) => {
         const { selection } = editor
         const { inputType: type } = event
         const data = event.dataTransfer || event.data || undefined
-
         // These two types occur while a user is composing text and can't be
         // cancelled. Let them through and wait for the composition to end.
         if (
@@ -873,19 +873,23 @@ export const Editable = (props: EditableProps) => {
         )}
         onPaste={useCallback(
           (event: React.ClipboardEvent<HTMLDivElement>) => {
-            // COMPAT: Firefox doesn't support the `beforeinput` event, so we
+            // COMPAT: Certain browsers don't support the `beforeinput` event, so we
             // fall back to React's `onPaste` here instead.
+            // COMPAT: Firefox, Chrome and Safari don't emit `beforeinput` events
+            // when "paste as text in windows system or paste and match style in macOS" is used, so fallback.
+            // Modified by https://github.com/ianstormtaylor/slate/blob/main/packages/slate-react/src/components/editable.tsx#L1094
             if (
-              IS_FIREFOX &&
               !readOnly &&
               hasEditableTarget(editor, event.target) &&
               !isEventHandled(event, attributes.onPaste)
             ) {
-              event.preventDefault()
-              editor.exec({
-                type: 'insert_data',
-                data: event.clipboardData,
-              })
+              if (!HAS_BEFORE_INPUT_SUPPORT || isPlainTextOnlyPaste(event.nativeEvent)) {
+                event.preventDefault()
+                editor.exec({
+                  type: 'insert_data',
+                  data: event.clipboardData,
+                })
+              }
             }
           },
           [attributes.onPaste]
