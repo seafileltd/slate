@@ -133,3 +133,11 @@ export const getEditableChild = (
 
   return child
 }
+
+export const isPlainTextOnlyPaste = (event: ClipboardEvent) => {
+  return (
+    event.clipboardData &&
+    event.clipboardData.getData('text/plain') !== '' &&
+    event.clipboardData.types.length === 1
+  )
+}
