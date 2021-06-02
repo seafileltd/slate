@@ -35,6 +35,7 @@ export const IS_FIREFOX_LEGACY =
 
 // COMPAT: Firefox/Edge Legacy don't support the `beforeinput` event
 // Chrome Legacy doesn't support `beforeinput` correctly
+// Modified by https://github.com/ianstormtaylor/slate/blob/main/packages/slate-react/src/utils/environment.ts#L52
 export const HAS_BEFORE_INPUT_SUPPORT =
   !IS_CHROME_LEGACY &&
   !IS_EDGE_LEGACY &&

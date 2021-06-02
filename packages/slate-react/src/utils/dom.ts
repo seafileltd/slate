@@ -134,6 +134,7 @@ export const getEditableChild = (
   return child
 }
 
+// Modified by https://github.com/ianstormtaylor/slate/blob/main/packages/slate-react/src/utils/dom.ts#L92
 export const isPlainTextOnlyPaste = (event: ClipboardEvent) => {
   return (
     event.clipboardData &&
