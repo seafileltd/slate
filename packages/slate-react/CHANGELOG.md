@@ -1,5 +1,11 @@
 # slate-react
 
+## 0.92.1
+
+### Patch Changes
+
+- [#5368](https://github.com/ianstormtaylor/slate/pull/5368) [`5a0d3974`](https://github.com/ianstormtaylor/slate/commit/5a0d3974d6cb2c099dff4c0976e9390d24c345ad) Thanks [@edhager](https://github.com/edhager)! - Delay rendering of placeholder to avoid IME hiding
+
 ## 0.92.0
 
 ### Minor Changes
