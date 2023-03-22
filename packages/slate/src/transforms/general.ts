@@ -1,4 +1,5 @@
 import { createDraft, finishDraft, isDraft } from 'immer'
+import { v4 } from 'md5'
 import {
   Ancestor,
   Descendant,
@@ -32,6 +33,7 @@ const applyToDraft = (editor: Editor, selection: Selection, op: Operation) => {
         )
       }
 
+      if (!node.id) node.id = v4()
       parent.children.splice(index, 0, node)
 
       if (selection) {
@@ -299,6 +301,7 @@ const applyToDraft = (editor: Editor, selection: Selection, op: Operation) => {
         }
       }
 
+      if (!newNode.id) newNode.id = v4()
       parent.children.splice(index + 1, 0, newNode)
 
       if (selection) {
