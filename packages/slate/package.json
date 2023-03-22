@@ -16,7 +16,7 @@
   "dependencies": {
     "immer": "^9.0.6",
     "is-plain-object": "^5.0.0",
-    "md5": "^2.3.0",
+    "nanoid": "^4.0.1",
     "tiny-warning": "^1.0.3"
   },
   "devDependencies": {
@@ -45,5 +45,8 @@
     "text",
     "wysiwyg",
     "wysiwym"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
