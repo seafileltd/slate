@@ -1,4 +1,4 @@
-import { Ancestor, Editor, Node, Range, RangeRef, Text } from 'slate'
+import { Ancestor, Editor, Node, Range, RangeRef, Text } from '@seafile/slate'
 import { Action } from '../hooks/android-input-manager/android-input-manager'
 import { TextDiff } from './diff-text'
 import { Key } from './key'

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import getDirection from 'direction'
-import { Editor, Node, Range, Element as SlateElement } from 'slate'
+import { Editor, Node, Range, Element as SlateElement } from '@seafile/slate'
 
 import Text from './text'
 import useChildren from '../hooks/use-children'

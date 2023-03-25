@@ -1,5 +1,5 @@
 import React, { forwardRef, memo, useRef, useState } from 'react'
-import { Editor, Text, Path, Element, Node } from 'slate'
+import { Editor, Text, Path, Element, Node } from '@seafile/slate'
 
 import { ReactEditor, useSlateStatic } from '..'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'

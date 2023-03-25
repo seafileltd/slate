@@ -1,4 +1,4 @@
-import { BaseSelection, Range } from 'slate'
+import { BaseSelection, Range } from '@seafile/slate'
 
 import { useSlateSelector } from './use-slate-selector'
 

@@ -1,4 +1,4 @@
-import { BaseRange, BaseText } from 'slate'
+import { BaseRange, BaseText } from '@seafile/slate'
 import { ReactEditor } from './plugin/react-editor'
 
 declare module 'slate' {

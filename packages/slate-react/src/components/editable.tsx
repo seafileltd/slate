@@ -19,7 +19,7 @@ import {
   Range,
   Text,
   Transforms,
-} from 'slate'
+} from '@seafile/slate'
 import { ReactEditor } from '../plugin/react-editor'
 import useChildren from '../hooks/use-children'
 import { DecorateContext } from '../hooks/use-decorate'

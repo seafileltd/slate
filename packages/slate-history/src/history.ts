@@ -1,5 +1,5 @@
 import { isPlainObject } from 'is-plain-object'
-import { Operation, Range } from 'slate'
+import { Operation, Range } from '@seafile/slate'
 
 interface Batch {
   operations: Operation[]
