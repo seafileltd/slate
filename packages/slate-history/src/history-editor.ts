@@ -1,4 +1,4 @@
-import { BaseEditor, Editor } from 'slate'
+import { BaseEditor, Editor } from '@seafile/slate'
 import { History } from './history'
 
 /**

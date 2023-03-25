@@ -8,7 +8,7 @@ import {
   Scrubber,
   Transforms,
   Element,
-} from 'slate'
+} from '@seafile/slate'
 
 import { Key } from '../utils/key'
 import {

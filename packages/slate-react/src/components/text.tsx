@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from 'react'
-import { Element, Range, Text as SlateText } from 'slate'
+import { Element, Range, Text as SlateText } from '@seafile/slate'
 import { ReactEditor, useSlateStatic } from '..'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { isTextDecorationsEqual } from '../utils/range-list'

@@ -7,7 +7,7 @@ import {
   Range,
   Text,
   Element,
-} from 'slate'
+} from '@seafile/slate'
 import { EDITOR_TO_PENDING_DIFFS } from './weak-maps'
 
 export type StringDiff = {

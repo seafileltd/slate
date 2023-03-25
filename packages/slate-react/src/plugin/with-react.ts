@@ -9,7 +9,7 @@ import {
   Point,
   Range,
   Transforms,
-} from 'slate'
+} from '@seafile/slate'
 import {
   TextDiff,
   transformPendingPoint,

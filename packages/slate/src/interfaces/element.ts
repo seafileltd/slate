@@ -8,6 +8,7 @@ import { Editor, Node, Path, Descendant, ExtendedType, Ancestor } from '..'
  */
 
 export interface BaseElement {
+  id?: string
   children: Descendant[]
 }
 

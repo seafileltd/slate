@@ -1,4 +1,4 @@
-import { Range } from 'slate'
+import { Range } from '@seafile/slate'
 import { PLACEHOLDER_SYMBOL } from './weak-maps'
 
 export const shallowCompare = (obj1: {}, obj2: {}) =>

@@ -10,6 +10,7 @@ import { isDeepEqual } from '../utils/deep-equal'
  */
 
 export interface BaseText {
+  id?: string
   text: string
 }
 

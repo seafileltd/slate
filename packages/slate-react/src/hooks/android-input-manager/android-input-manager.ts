@@ -1,5 +1,13 @@
 import { DebouncedFunc } from 'lodash'
-import { Editor, Node, Path, Point, Range, Text, Transforms } from 'slate'
+import {
+  Editor,
+  Node,
+  Path,
+  Point,
+  Range,
+  Text,
+  Transforms,
+} from '@seafile/slate'
 import { ReactEditor } from '../../plugin/react-editor'
 import {
   applyStringDiff,

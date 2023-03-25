@@ -1,4 +1,4 @@
-import { Editor, Operation, Path, Range, Transforms } from 'slate'
+import { Editor, Operation, Path, Range, Transforms } from '@seafile/slate'
 
 import { HistoryEditor } from './history-editor'
 

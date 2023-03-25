@@ -53,6 +53,7 @@ export type EditorMarks = Omit<Text, 'text'>
  */
 
 export interface BaseEditor {
+  id?: string
   children: Descendant[]
   selection: Selection
   operations: Operation[]
