@@ -105,6 +105,12 @@ export function createElement(
   attributes: { [key: string]: any },
   children: any[]
 ): Element {
+  if (attributes && attributes.hasOwnProperty('__self')) {
+    delete attributes.__self
+  }
+  if (attributes && attributes.hasOwnProperty('__source')) {
+    delete attributes.__source
+  }
   return { ...attributes, children: resolveDescendants(children) }
 }
 
