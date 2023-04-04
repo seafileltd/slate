@@ -36,5 +36,8 @@
     "serialize",
     "slate",
     "xml"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

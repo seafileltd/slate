@@ -69,5 +69,8 @@
     "text",
     "wysiwyg",
     "wysiwym"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

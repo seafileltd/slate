@@ -3506,13 +3506,12 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.7.4
     "@seafile/slate-hyperscript": ^0.81.3
-    "@types/uuid": ^9.0.1
     immer: ^9.0.6
     is-plain-object: ^5.0.0
     lodash: ^4.17.21
+    slugid: ^3.2.0
     source-map-loader: ^4.0.0
     tiny-warning: ^1.0.3
-    uuid: ^9.0.0
   languageName: unknown
   linkType: soft
 
@@ -3890,13 +3889,6 @@ __metadata:
   version: 4.0.2
   resolution: "@types/tough-cookie@npm:4.0.2"
   checksum: e055556ffdaa39ad85ede0af192c93f93f986f4bd9e9426efdc2948e3e2632db3a4a584d4937dbf6d7620527419bc99e6182d3daf2b08685e710f2eda5291905
-  languageName: node
-  linkType: hard
-
-"@types/uuid@npm:^9.0.1":
-  version: 9.0.1
-  resolution: "@types/uuid@npm:9.0.1"
-  checksum: c472b8a77cbeded4bc529220b8611afa39bd64677f507838f8083d8aac8033b1f88cb9ddaa2f8589e0dcd2317291d0f6e1379f82d5ceebd6f74f3b4825288e00
   languageName: node
   linkType: hard
 
@@ -14009,6 +14001,15 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"slugid@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "slugid@npm:3.2.0"
+  dependencies:
+    uuid: ^8.3.2
+  checksum: 723ad9e0be82f6b842fd5d9ee6d0f79efa0e6b0c56b4c77673c3edb1a0cb014a9b770471e290fd80b3e70e5d715c27c2f422244b74bb87da4f869c4f7705c7c9
+  languageName: node
+  linkType: hard
+
 "smart-buffer@npm:^4.1.0":
   version: 4.2.0
   resolution: "smart-buffer@npm:4.2.0"
@@ -15519,12 +15520,12 @@ typescript@4.0.5:
   languageName: node
   linkType: hard
 
-"uuid@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "uuid@npm:9.0.0"
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
   bin:
     uuid: dist/bin/uuid
-  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 
