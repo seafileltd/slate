@@ -1,7 +1,7 @@
 import { BaseRange, BaseText } from '@seafile/slate'
 import { ReactEditor } from './plugin/react-editor'
 
-declare module 'slate' {
+declare module '@seafile/slate' {
   interface CustomTypes {
     Editor: ReactEditor
     Text: BaseText & {

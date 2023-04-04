@@ -1,5 +1,5 @@
 import { createDraft, finishDraft, isDraft } from 'immer'
-import { v4 } from 'uuid'
+import { nice } from 'slugid'
 import {
   Ancestor,
   Descendant,
@@ -33,7 +33,7 @@ const applyToDraft = (editor: Editor, selection: Selection, op: Operation) => {
         )
       }
 
-      if (!node.id) node.id = v4()
+      if (!node.id) node.id = nice()
       parent.children.splice(index, 0, node)
 
       if (selection) {
@@ -301,7 +301,7 @@ const applyToDraft = (editor: Editor, selection: Selection, op: Operation) => {
         }
       }
 
-      if (!newNode.id) newNode.id = v4()
+      if (!newNode.id) newNode.id = nice()
       parent.children.splice(index + 1, 0, newNode)
 
       if (selection) {

@@ -1,7 +1,7 @@
 {
   "name": "@seafile/slate-hyperscript",
   "description": "A hyperscript helper for creating Slate documents.",
-  "version": "0.81.5",
+  "version": "0.81.7",
   "license": "MIT",
   "repository": "git://github.com/ianstormtaylor/slate.git",
   "main": "dist/index.js",
@@ -36,5 +36,8 @@
     "serialize",
     "slate",
     "xml"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

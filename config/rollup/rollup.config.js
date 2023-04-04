@@ -29,7 +29,7 @@ function configure(pkg, env, target) {
   const isUmd = target === 'umd'
   const isModule = target === 'module'
   const isCommonJs = target === 'cjs'
-  const input = `packages/${getPkgName(getPkgName(pkg.name))}/src/index.ts`
+  const input = `packages/${getPkgName(pkg.name)}/src/index.ts`
   const deps = []
     .concat(pkg.dependencies ? Object.keys(pkg.dependencies) : [])
     .concat(pkg.peerDependencies ? Object.keys(pkg.peerDependencies) : [])
