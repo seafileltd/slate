@@ -18,6 +18,7 @@ import {
 
 export interface GeneralTransforms {
   transform: (editor: Editor, op: Operation) => void
+  applyToDraft: (editor: Editor, selection: Selection, op: Operation) => void
 }
 
 export const applyToDraft = (
@@ -344,4 +345,6 @@ export const GeneralTransforms: GeneralTransforms = {
       }
     }
   },
+
+  applyToDraft,
 }
