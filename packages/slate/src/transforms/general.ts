@@ -20,7 +20,11 @@ export interface GeneralTransforms {
   transform: (editor: Editor, op: Operation) => void
 }
 
-const applyToDraft = (editor: Editor, selection: Selection, op: Operation) => {
+export const applyToDraft = (
+  editor: Editor,
+  selection: Selection,
+  op: Operation
+) => {
   switch (op.type) {
     case 'insert_node': {
       const { path, node } = op
