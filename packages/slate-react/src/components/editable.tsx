@@ -19,7 +19,6 @@ import {
   Range,
   Text,
   Transforms,
-  Point,
 } from '@seafile/slate'
 import { ReactEditor } from '../plugin/react-editor'
 import useChildren from '../hooks/use-children'
@@ -70,6 +69,7 @@ import { RestoreDOM } from './restore-dom/restore-dom'
 import { useAndroidInputManager } from '../hooks/android-input-manager/use-android-input-manager'
 import { useTrackUserInput } from '../hooks/use-track-user-input'
 import { AndroidInputManager } from '../hooks/android-input-manager/android-input-manager'
+import { Cursors } from '../cursor'
 
 type DeferredOperation = () => void
 
@@ -105,15 +105,6 @@ export interface RenderLeafProps {
     'data-slate-leaf': true
   }
 }
-
-export interface Cursor {
-  anchor: Point
-  focus: Point
-  color: string
-  name: string
-}
-
-export type Cursors = Cursor[] | null | undefined
 
 /**
  * `EditableProps` are passed to the `<Editable>` component.

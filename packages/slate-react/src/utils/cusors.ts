@@ -1,5 +1,5 @@
 import { NodeEntry, Range, Path, Text } from '@seafile/slate'
-import { Cursors } from '../components/editable'
+import { Cursors } from '../cursor'
 
 export const hasCursors = (cursors: Cursors, node: NodeEntry): Boolean => {
   const [, path] = node

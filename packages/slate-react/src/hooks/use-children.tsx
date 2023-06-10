@@ -8,13 +8,13 @@ import { useSlateStatic } from './use-slate-static'
 import { useDecorate } from './use-decorate'
 import { NODE_TO_INDEX, NODE_TO_PARENT } from '../utils/weak-maps'
 import {
-  Cursors,
   RenderElementProps,
   RenderLeafProps,
   RenderPlaceholderProps,
 } from '../components/editable'
 import { SelectedContext } from './use-selected'
 import { decorateCursors, hasCursors } from '../utils/cusors'
+import { Cursors } from '../cursor'
 
 /**
  * Children.
@@ -28,7 +28,6 @@ const useChildren = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
-  hasCursor?: Boolean
 }) => {
   const {
     decorations,
@@ -78,13 +77,12 @@ const useChildren = (props: {
             renderPlaceholder={renderPlaceholder}
             renderLeaf={renderLeaf}
             selection={sel}
-            hasCursor={hasCursor}
             cursors={childCursors}
           />
         </SelectedContext.Provider>
       )
     } else {
-      if (hasCursor && cursors) {
+      if (cursors) {
         const ranges = decorateCursors(cursors, [n, p])
         ds.push(...ranges)
       }

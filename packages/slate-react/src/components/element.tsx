@@ -14,11 +14,11 @@ import {
 } from '../utils/weak-maps'
 import { isElementDecorationsEqual } from '../utils/range-list'
 import {
-  Cursors,
   RenderElementProps,
   RenderLeafProps,
   RenderPlaceholderProps,
 } from './editable'
+import { Cursors } from '../cursor'
 
 /**
  * Element.
@@ -31,7 +31,6 @@ const Element = (props: {
   renderPlaceholder: (props: RenderPlaceholderProps) => JSX.Element
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
-  hasCursor?: Boolean
   cursors?: Cursors
 }) => {
   const {
@@ -41,7 +40,6 @@ const Element = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
-    hasCursor,
     cursors,
   } = props
   const editor = useSlateStatic()
@@ -70,7 +68,6 @@ const Element = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
-    hasCursor,
     cursors,
   })
 
