@@ -14,6 +14,7 @@ import {
 } from '../utils/weak-maps'
 import { isElementDecorationsEqual } from '../utils/range-list'
 import {
+  Cursors,
   RenderElementProps,
   RenderLeafProps,
   RenderPlaceholderProps,
@@ -30,6 +31,8 @@ const Element = (props: {
   renderPlaceholder: (props: RenderPlaceholderProps) => JSX.Element
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
+  hasCursor?: Boolean
+  cursors?: Cursors
 }) => {
   const {
     decorations,
@@ -38,6 +41,8 @@ const Element = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
+    hasCursor,
+    cursors,
   } = props
   const editor = useSlateStatic()
   const readOnly = useReadOnly()
@@ -65,6 +70,8 @@ const Element = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
+    hasCursor,
+    cursors,
   })
 
   // Attributes that the developer must mix into the element in their
@@ -144,7 +151,8 @@ const MemoizedElement = React.memo(Element, (prev, next) => {
     (prev.selection === next.selection ||
       (!!prev.selection &&
         !!next.selection &&
-        Range.equals(prev.selection, next.selection)))
+        Range.equals(prev.selection, next.selection))) &&
+    prev.cursors === next.cursors
   )
 })
 

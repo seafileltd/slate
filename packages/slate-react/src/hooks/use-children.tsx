@@ -8,11 +8,13 @@ import { useSlateStatic } from './use-slate-static'
 import { useDecorate } from './use-decorate'
 import { NODE_TO_INDEX, NODE_TO_PARENT } from '../utils/weak-maps'
 import {
+  Cursors,
   RenderElementProps,
   RenderLeafProps,
   RenderPlaceholderProps,
 } from '../components/editable'
 import { SelectedContext } from './use-selected'
+import { decorateCursors, hasCursors } from '../utils/cusors'
 
 /**
  * Children.
@@ -25,6 +27,8 @@ const useChildren = (props: {
   renderPlaceholder: (props: RenderPlaceholderProps) => JSX.Element
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
+  cursors?: Cursors
+  hasCursor?: Boolean
 }) => {
   const {
     decorations,
@@ -33,6 +37,7 @@ const useChildren = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
+    cursors,
   } = props
   const decorate = useDecorate()
   const editor = useSlateStatic()
@@ -50,6 +55,9 @@ const useChildren = (props: {
     const range = Editor.range(editor, p)
     const sel = selection && Range.intersection(range, selection)
     const ds = decorate([n, p])
+    // cursors
+    const hasCursor = hasCursors(cursors, [n, p])
+    const childCursors = hasCursor ? cursors : null
 
     for (const dec of decorations) {
       const d = Range.intersection(dec, range)
@@ -70,10 +78,16 @@ const useChildren = (props: {
             renderPlaceholder={renderPlaceholder}
             renderLeaf={renderLeaf}
             selection={sel}
+            hasCursor={hasCursor}
+            cursors={childCursors}
           />
         </SelectedContext.Provider>
       )
     } else {
+      if (hasCursor && cursors) {
+        const ranges = decorateCursors(cursors, [n, p])
+        ds.concat(ranges)
+      }
       children.push(
         <TextComponent
           decorations={ds}

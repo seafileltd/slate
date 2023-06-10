@@ -19,6 +19,7 @@ import {
   Range,
   Text,
   Transforms,
+  Point,
 } from '@seafile/slate'
 import { ReactEditor } from '../plugin/react-editor'
 import useChildren from '../hooks/use-children'
@@ -105,6 +106,15 @@ export interface RenderLeafProps {
   }
 }
 
+export interface Cursor {
+  anchor: Point
+  focus: Point
+  color: string
+  isCaret: boolean
+}
+
+export type Cursors = Cursor[] | null | undefined
+
 /**
  * `EditableProps` are passed to the `<Editable>` component.
  */
@@ -122,6 +132,7 @@ export type EditableProps = {
   scrollSelectionIntoView?: (editor: ReactEditor, domRange: DOMRange) => void
   as?: React.ElementType
   disableDefaultStyles?: boolean
+  cursors: Cursors
 } & React.TextareaHTMLAttributes<HTMLDivElement>
 
 /**
@@ -146,6 +157,7 @@ export const Editable = (props: EditableProps) => {
     style: userStyle = {},
     as: Component = 'div',
     disableDefaultStyles = false,
+    cursors,
     ...attributes
   } = props
   const editor = useSlate()
@@ -1690,6 +1702,7 @@ export const Editable = (props: EditableProps) => {
               renderPlaceholder={renderPlaceholder}
               renderLeaf={renderLeaf}
               selection={editor.selection}
+              cursors={cursors}
             />
           </Component>
         </RestoreDOM>
