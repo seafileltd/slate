@@ -110,7 +110,7 @@ export interface Cursor {
   anchor: Point
   focus: Point
   color: string
-  isCaret: boolean
+  name: string
 }
 
 export type Cursors = Cursor[] | null | undefined
