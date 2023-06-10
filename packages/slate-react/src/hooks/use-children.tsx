@@ -86,7 +86,7 @@ const useChildren = (props: {
     } else {
       if (hasCursor && cursors) {
         const ranges = decorateCursors(cursors, [n, p])
-        ds.concat(ranges)
+        ds.push(...ranges)
       }
       children.push(
         <TextComponent
