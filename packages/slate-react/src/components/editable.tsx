@@ -69,6 +69,7 @@ import { RestoreDOM } from './restore-dom/restore-dom'
 import { useAndroidInputManager } from '../hooks/android-input-manager/use-android-input-manager'
 import { useTrackUserInput } from '../hooks/use-track-user-input'
 import { AndroidInputManager } from '../hooks/android-input-manager/android-input-manager'
+import { Cursors } from '../cursor'
 
 type DeferredOperation = () => void
 
@@ -122,6 +123,7 @@ export type EditableProps = {
   scrollSelectionIntoView?: (editor: ReactEditor, domRange: DOMRange) => void
   as?: React.ElementType
   disableDefaultStyles?: boolean
+  cursors: Cursors
 } & React.TextareaHTMLAttributes<HTMLDivElement>
 
 /**
@@ -146,6 +148,7 @@ export const Editable = (props: EditableProps) => {
     style: userStyle = {},
     as: Component = 'div',
     disableDefaultStyles = false,
+    cursors,
     ...attributes
   } = props
   const editor = useSlate()
@@ -1690,6 +1693,7 @@ export const Editable = (props: EditableProps) => {
               renderPlaceholder={renderPlaceholder}
               renderLeaf={renderLeaf}
               selection={editor.selection}
+              cursors={cursors}
             />
           </Component>
         </RestoreDOM>

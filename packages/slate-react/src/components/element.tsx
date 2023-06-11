@@ -18,6 +18,7 @@ import {
   RenderLeafProps,
   RenderPlaceholderProps,
 } from './editable'
+import { Cursors } from '../cursor'
 
 /**
  * Element.
@@ -30,6 +31,7 @@ const Element = (props: {
   renderPlaceholder: (props: RenderPlaceholderProps) => JSX.Element
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
+  cursors?: Cursors
 }) => {
   const {
     decorations,
@@ -38,6 +40,7 @@ const Element = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
+    cursors,
   } = props
   const editor = useSlateStatic()
   const readOnly = useReadOnly()
@@ -65,6 +68,7 @@ const Element = (props: {
     renderPlaceholder,
     renderLeaf,
     selection,
+    cursors,
   })
 
   // Attributes that the developer must mix into the element in their
@@ -144,7 +148,8 @@ const MemoizedElement = React.memo(Element, (prev, next) => {
     (prev.selection === next.selection ||
       (!!prev.selection &&
         !!next.selection &&
-        Range.equals(prev.selection, next.selection)))
+        Range.equals(prev.selection, next.selection))) &&
+    prev.cursors === next.cursors
   )
 })
 

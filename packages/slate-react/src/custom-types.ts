@@ -11,6 +11,7 @@ declare module '@seafile/slate' {
     Range: BaseRange & {
       placeholder?: string
       onPlaceholderResize?: (node: HTMLElement | null) => void
+      isCaret?: boolean
     }
   }
 }
