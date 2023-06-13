@@ -28,6 +28,7 @@ const useChildren = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
+  isComposing?: boolean
 }) => {
   const {
     decorations,
@@ -37,9 +38,16 @@ const useChildren = (props: {
     renderLeaf,
     selection,
     cursors,
+    isComposing,
   } = props
   const decorate = useDecorate()
   const editor = useSlateStatic()
+  const composeNodeEntry = isComposing
+    ? Editor.above(editor, {
+        mode: 'highest',
+        match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+      })
+    : null
   const path = ReactEditor.findPath(editor, node)
   const children = []
   const isLeafBlock =
@@ -78,6 +86,7 @@ const useChildren = (props: {
             renderLeaf={renderLeaf}
             selection={sel}
             cursors={childCursors}
+            composeNodeEntry={i === 0 || i === 1 ? composeNodeEntry : null}
           />
         </SelectedContext.Provider>
       )

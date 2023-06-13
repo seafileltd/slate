@@ -1,6 +1,12 @@
 import React, { useCallback } from 'react'
 import getDirection from 'direction'
-import { Editor, Node, Range, Element as SlateElement } from '@seafile/slate'
+import {
+  Editor,
+  Node,
+  Range,
+  Element as SlateElement,
+  NodeEntry,
+} from '@seafile/slate'
 
 import Text from './text'
 import useChildren from '../hooks/use-children'
@@ -32,6 +38,7 @@ const Element = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
+  composeNodeEntry?: NodeEntry | null | undefined
 }) => {
   const {
     decorations,
@@ -41,6 +48,7 @@ const Element = (props: {
     renderLeaf,
     selection,
     cursors,
+    composeNodeEntry,
   } = props
   const editor = useSlateStatic()
   const readOnly = useReadOnly()
@@ -135,7 +143,7 @@ const Element = (props: {
     NODE_TO_PARENT.set(text, element)
   }
 
-  return renderElement({ attributes, children, element })
+  return renderElement({ attributes, children, element, composeNodeEntry })
 }
 
 const MemoizedElement = React.memo(Element, (prev, next) => {
@@ -149,7 +157,8 @@ const MemoizedElement = React.memo(Element, (prev, next) => {
       (!!prev.selection &&
         !!next.selection &&
         Range.equals(prev.selection, next.selection))) &&
-    prev.cursors === next.cursors
+    prev.cursors === next.cursors &&
+    prev.composeNodeEntry === next.composeNodeEntry
   )
 })
 

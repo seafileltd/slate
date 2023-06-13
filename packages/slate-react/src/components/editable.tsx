@@ -91,6 +91,7 @@ export interface RenderElementProps {
     dir?: 'rtl'
     ref: any
   }
+  composeNodeEntry?: NodeEntry | null | undefined
 }
 
 /**
@@ -1694,6 +1695,7 @@ export const Editable = (props: EditableProps) => {
               renderLeaf={renderLeaf}
               selection={editor.selection}
               cursors={cursors}
+              isComposing={isComposing}
             />
           </Component>
         </RestoreDOM>
