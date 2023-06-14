@@ -54,9 +54,6 @@ const useChildren = (props: {
     const range = Editor.range(editor, p)
     const sel = selection && Range.intersection(range, selection)
     const ds = decorate([n, p])
-    // cursors
-    const hasCursor = hasCursors(cursors, [n, p])
-    const childCursors = hasCursor ? cursors : null
 
     for (const dec of decorations) {
       const d = Range.intersection(dec, range)
@@ -67,6 +64,10 @@ const useChildren = (props: {
     }
 
     if (Element.isElement(n)) {
+      // cursors
+      const hasCursor = hasCursors(cursors, [n, p])
+      const childCursors = hasCursor ? cursors : null
+
       children.push(
         <SelectedContext.Provider key={`provider-${key.id}`} value={!!sel}>
           <ElementComponent

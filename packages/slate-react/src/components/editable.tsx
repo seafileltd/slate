@@ -21,7 +21,6 @@ import {
   Transforms,
 } from '@seafile/slate'
 import { ReactEditor } from '../plugin/react-editor'
-import useChildren from '../hooks/use-children'
 import { DecorateContext } from '../hooks/use-decorate'
 import { useIsomorphicLayoutEffect } from '../hooks/use-isomorphic-layout-effect'
 import { ReadOnlyContext } from '../hooks/use-read-only'
@@ -69,13 +68,10 @@ import { RestoreDOM } from './restore-dom/restore-dom'
 import { useAndroidInputManager } from '../hooks/android-input-manager/use-android-input-manager'
 import { useTrackUserInput } from '../hooks/use-track-user-input'
 import { AndroidInputManager } from '../hooks/android-input-manager/android-input-manager'
+import Children from './children'
 import { Cursors } from '../cursor'
 
 type DeferredOperation = () => void
-
-const Children = (props: Parameters<typeof useChildren>[0]) => (
-  <React.Fragment>{useChildren(props)}</React.Fragment>
-)
 
 /**
  * `RenderElementProps` are passed to the `renderElement` handler.
@@ -91,6 +87,8 @@ export interface RenderElementProps {
     dir?: 'rtl'
     ref: any
   }
+  cursors?: Cursors
+  isComposing?: boolean
 }
 
 /**
@@ -161,6 +159,14 @@ export const Editable = (props: EditableProps) => {
   >()
 
   const { onUserInput, receivedUserInput } = useTrackUserInput()
+  const composingNode = useMemo(() => {
+    if (!isComposing) return null
+    const block = Editor.above(editor, {
+      mode: 'highest',
+      match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    })
+    return block ? block[0] : null
+  }, [editor, isComposing])
 
   const [, forceRender] = useReducer(s => s + 1, 0)
   EDITOR_TO_FORCE_RENDER.set(editor, forceRender)
@@ -1694,6 +1700,7 @@ export const Editable = (props: EditableProps) => {
               renderLeaf={renderLeaf}
               selection={editor.selection}
               cursors={cursors}
+              composingNode={composingNode}
             />
           </Component>
         </RestoreDOM>
