@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  Editor,
-  Range,
-  Element,
-  Ancestor,
-  Descendant,
-  Node,
-} from '@seafile/slate'
+import { Editor, Range, Element, Ancestor, Descendant } from '@seafile/slate'
 
 import ElementComponent from '../components/element'
 import TextComponent from '../components/text'
@@ -35,7 +28,6 @@ const useChildren = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
-  composingNode?: Node | null | undefined
 }) => {
   const {
     decorations,
@@ -45,7 +37,6 @@ const useChildren = (props: {
     renderLeaf,
     selection,
     cursors,
-    composingNode,
   } = props
   const decorate = useDecorate()
   const editor = useSlateStatic()
@@ -63,9 +54,6 @@ const useChildren = (props: {
     const range = Editor.range(editor, p)
     const sel = selection && Range.intersection(range, selection)
     const ds = decorate([n, p])
-    // cursors
-    const hasCursor = hasCursors(cursors, [n, p])
-    const childCursors = hasCursor ? cursors : null
 
     for (const dec of decorations) {
       const d = Range.intersection(dec, range)
@@ -76,6 +64,10 @@ const useChildren = (props: {
     }
 
     if (Element.isElement(n)) {
+      // cursors
+      const hasCursor = hasCursors(cursors, [n, p])
+      const childCursors = hasCursor ? cursors : null
+
       children.push(
         <SelectedContext.Provider key={`provider-${key.id}`} value={!!sel}>
           <ElementComponent
@@ -87,7 +79,6 @@ const useChildren = (props: {
             renderLeaf={renderLeaf}
             selection={sel}
             cursors={childCursors}
-            composingNode={i === 0 || i === 1 ? composingNode : null}
           />
         </SelectedContext.Provider>
       )
