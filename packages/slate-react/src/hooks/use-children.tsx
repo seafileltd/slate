@@ -1,5 +1,12 @@
 import React from 'react'
-import { Editor, Range, Element, Ancestor, Descendant } from '@seafile/slate'
+import {
+  Editor,
+  Range,
+  Element,
+  Ancestor,
+  Descendant,
+  Node,
+} from '@seafile/slate'
 
 import ElementComponent from '../components/element'
 import TextComponent from '../components/text'
@@ -28,6 +35,7 @@ const useChildren = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
+  composingNode?: Node | null | undefined
 }) => {
   const {
     decorations,
@@ -37,6 +45,7 @@ const useChildren = (props: {
     renderLeaf,
     selection,
     cursors,
+    composingNode,
   } = props
   const decorate = useDecorate()
   const editor = useSlateStatic()
@@ -78,6 +87,7 @@ const useChildren = (props: {
             renderLeaf={renderLeaf}
             selection={sel}
             cursors={childCursors}
+            composingNode={i === 0 || i === 1 ? composingNode : null}
           />
         </SelectedContext.Provider>
       )

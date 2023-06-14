@@ -91,6 +91,7 @@ export interface RenderElementProps {
     dir?: 'rtl'
     ref: any
   }
+  composingNode: Node | null | undefined
 }
 
 /**
@@ -161,6 +162,14 @@ export const Editable = (props: EditableProps) => {
   >()
 
   const { onUserInput, receivedUserInput } = useTrackUserInput()
+  const composingNode = useMemo(() => {
+    if (!isComposing) return null
+    const block = Editor.above(editor, {
+      mode: 'highest',
+      match: n => Element.isElement(n) && Editor.isBlock(editor, n),
+    })
+    return block ? block[0] : null
+  }, [editor, isComposing])
 
   const [, forceRender] = useReducer(s => s + 1, 0)
   EDITOR_TO_FORCE_RENDER.set(editor, forceRender)
@@ -1694,6 +1703,7 @@ export const Editable = (props: EditableProps) => {
               renderLeaf={renderLeaf}
               selection={editor.selection}
               cursors={cursors}
+              composingNode={composingNode}
             />
           </Component>
         </RestoreDOM>

@@ -32,6 +32,7 @@ const Element = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
+  composingNode: Node | null | undefined
 }) => {
   const {
     decorations,
@@ -41,6 +42,7 @@ const Element = (props: {
     renderLeaf,
     selection,
     cursors,
+    composingNode,
   } = props
   const editor = useSlateStatic()
   const readOnly = useReadOnly()
@@ -135,7 +137,7 @@ const Element = (props: {
     NODE_TO_PARENT.set(text, element)
   }
 
-  return renderElement({ attributes, children, element })
+  return renderElement({ attributes, children, element, composingNode })
 }
 
 const MemoizedElement = React.memo(Element, (prev, next) => {
@@ -149,7 +151,8 @@ const MemoizedElement = React.memo(Element, (prev, next) => {
       (!!prev.selection &&
         !!next.selection &&
         Range.equals(prev.selection, next.selection))) &&
-    prev.cursors === next.cursors
+    prev.cursors === next.cursors &&
+    prev.composingNode === next.composingNode
   )
 })
 
