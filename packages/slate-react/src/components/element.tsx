@@ -71,6 +71,7 @@ const Element = (props: {
     renderLeaf,
     selection,
     cursors,
+    isComposing,
   })
 
   // Attributes that the developer must mix into the element in their

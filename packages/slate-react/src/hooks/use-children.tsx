@@ -28,6 +28,7 @@ const useChildren = (props: {
   renderLeaf?: (props: RenderLeafProps) => JSX.Element
   selection: Range | null
   cursors?: Cursors
+  isComposing?: boolean | undefined
 }) => {
   const {
     decorations,
@@ -37,6 +38,7 @@ const useChildren = (props: {
     renderLeaf,
     selection,
     cursors,
+    isComposing,
   } = props
   const decorate = useDecorate()
   const editor = useSlateStatic()
@@ -79,6 +81,7 @@ const useChildren = (props: {
             renderLeaf={renderLeaf}
             selection={sel}
             cursors={childCursors}
+            isComposing={isComposing}
           />
         </SelectedContext.Provider>
       )
