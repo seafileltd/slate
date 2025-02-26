@@ -372,8 +372,13 @@ export const Editable = (props: EditableProps) => {
       // Otherwise the DOM selection is out of sync, so update it.
       state.isUpdatingSelection = true
 
-      const newDomRange: DOMRange | null =
-        selection && ReactEditor.toDOMRange(editor, selection)
+      let newDomRange: DOMRange | null = null
+
+      try {
+        newDomRange = selection && ReactEditor.toDOMRange(editor, selection)
+      } catch (e) {
+        // Ignore, dom and state might be out of sync
+      }
 
       if (newDomRange) {
         if (Range.isBackward(selection!)) {
